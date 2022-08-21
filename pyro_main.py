@@ -9,6 +9,15 @@ import openpyxl
 from pyrogram import Client
 from pyrogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton, Message
 
+
+def find_first_empty(self):
+    r = 0
+    while True:
+        r += 1
+        if not self.cell(r,1).value:
+            return r
+
+
 main_group_id = 'seller_channel_haha'
 
 file_ = openpyxl.load_workbook('list.xlsx')
@@ -23,9 +32,9 @@ data_ = [({
     'category': sheet_obj_.cell(row=i + 1, column=2).value,
     'name_new': sheet_obj_.cell(row=i + 1, column=4).value,
     'id': sheet_obj_.cell(row=i + 1, column=5).value,
-}) for i in range(1, sheet_obj_.max_row)]
+}) for i in range(1, find_first_empty(sheet_obj_))]
 
-for i in range(sheet_obj_categories.max_row-1):
+for i in range(find_first_empty(sheet_obj_categories)):
     if sheet_obj_categories.cell(row=i + 1, column=1).value not in categories:
         categories.append(sheet_obj_categories.cell(row=i + 1, column=1).value)
 
@@ -159,6 +168,61 @@ async def main_group_send_menu(app_bot, app_user):
 
     print(main_group_id)
     await app_bot.send_message(main_group_id, 'Категорії', reply_markup=CategoriesMarkup)
-#
-# asyncio.run(main_group())
-# asyncio.run(main())
+
+
+async def send_new_msg(app_bot, app_user, message, new_channel_id):
+    last_mes = await app_user.get_messages(message.chat.id, message.id - 1)
+    mg_id = await app_user.get_messages(message.chat.id, message.id - 1).media_group_id
+    if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
+        kk = random.randrange(1, 4)
+        await asyncio.sleep(kk)
+        if message.media_group_id:
+            try:
+                await app_user.copy_media_group(new_channel_id,
+                                                message.chat.id, message.id)
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.copy_media_group(new_channel_id,
+                                                message.chat.id, message.id)
+            except Exception as e:
+                print(e)
+        elif message.photo:
+            try:
+                await app_user.send_photo(new_channel_id, message.photo.file_id)
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.send_photo(new_channel_id, message.photo.file_id)
+            except Exception as e:
+                print(e)
+        if message.text:
+            try:
+                await app_user.send_message(new_channel_id, message.text)
+                print('text')
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.send_message(new_channel_id, message.text)
+            except Exception as e:
+                print(e)
+
+
+async def add_new_category(app_bot, message):
+    file_c = openpyxl.load_workbook('categories.xlsx')
+    sheet_obj_n = file_c.active
+    row = find_first_empty(sheet_obj_n)
+    name = message.text.replace('/add_category', '').replace(' ', '')
+    categories = []
+    for i in range(find_first_empty(sheet_obj_n)):
+        if sheet_obj_n.cell(row=i + 1, column=1).value not in categories:
+            categories.append(sheet_obj_n.cell(row=i + 1, column=1).value)
+    if name not in categories:
+        sheet_obj_n.cell(row, 1, value=name)
+        file_c.save('categories.xlsx')
+        file_c.close()
+        await app_bot.send_message(message.chat.id, 'Категория добавлена')
+    else:
+        await app_bot.send_message(message.chat.id, 'Такая категория уже существует')
+
+    await asyncio.sleep(3)
