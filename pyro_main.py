@@ -1,9 +1,19 @@
 import asyncio
+import os
 import random
 from pyrogram.errors import FloodWait
-from slugify import slugify
 import openpyxl
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from PIL import Image, ImageFilter
+
+from photos import upload_file
+
+def ids():
+    file_c = openpyxl.load_workbook('list.xlsx')
+    sheet_obj_c = file_c.active
+    ids = [sheet_obj_c.cell(row=i + 1, column=6).value for i in range(1, find_first_empty(sheet_obj_c) - 1)]
+    file_c.close()
+    return ids
 
 
 def find_first_empty(self):
@@ -14,7 +24,7 @@ def find_first_empty(self):
             return r
 
 
-main_group_id = 'seller_channel_haha'
+main_group_id = 'Turk_0pt'
 
 file_ = openpyxl.load_workbook('list.xlsx')
 sheet_obj_ = file_.active
@@ -46,51 +56,112 @@ def find_cell_by_link(v, sheet_obj):
             return i
 
 
+def find_cell_by_id(v, sheet_obj):
+    i = 0
+    while True:
+        i += 1
+        if sheet_obj.cell(i, 6).value == v:
+            return i
+
+
 async def main_create(app_bot, app_user, CallbackQuery):
     global data_
-    for i in data_:
+    ids_ = ids()
+    for i in range(len(data_)):
         print('iter')
         await asyncio.sleep(10)
-        await create_channels(str(i.get('channel')), i, app_bot, app_user, CallbackQuery)
+        await create_channels(data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
     await CallbackQuery.answer()
+    await app_bot.send_message(CallbackQuery.message.chat.id,
+                               'Канали створені')
 
 
-async def create_channel(data, channel, app_user):
+async def create_channel(channel, app_user, chat_id):
     await app_user.promote_chat_member(channel.id, "seller_test_s_bot")
-    print(data.get('channel').replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'))
     last_mes = None
     mg_id = 0
     async for message in app_user.get_chat_history(
-            data.get('channel').replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'), limit=10):
+            chat_id):
         if not last_mes:
             last_mes = message
-        if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
+        if message.photo or last_mes.photo or last_mes.media_group_id:
             last_mes = message
             kk = random.randrange(1, 4)
             await asyncio.sleep(kk)
-            if message.media_group_id:
+            if message.media_group_id and message.chat.id != -1001478074210 and mg_id != message.media_group_id:
                 try:
                     await app_user.copy_media_group(channel.id,
-                                                    data.get('channel').replace('https://t.me/', '').replace(
-                                                        'joinchat/', '').replace('-', '_'), message.id)
+                                                    chat_id, message.id)
                 except FloodWait as e:
                     print('wait for', e.value, 'to send message')
                     await asyncio.sleep(e.value + 2)
                     await app_user.copy_media_group(channel.id,
-                                                    data.get('channel').replace('https://t.me/', '').replace(
-                                                        'joinchat/', '').replace('-', '_'), message.id)
+                                                    chat_id, message.id)
                 except Exception as e:
                     print(e)
+                mg_id = message.media_group_id
             elif message.photo:
-                try:
-                    await app_user.send_photo(channel.id, message.photo.file_id)
-                except FloodWait as e:
-                    print('wait for', e.value, 'to send message')
-                    await asyncio.sleep(e.value + 2)
-                    await app_user.send_photo(channel.id, message.photo.file_id)
-                except Exception as e:
-                    print(e)
-            if message.text:
+                if message.chat.id == -1001478074210 and mg_id == message.media_group_id:
+                    photo = await app_user.download_media(message)
+                    im = Image.open(photo)
+                    width, height = im.size
+                    box = (int(width * 0.8), int(height - height / 8), width, height)
+                    ic = im.crop(box)
+                    for i in range(
+                            10):  # with the BLUR filter, you can blur a few times to get the effect you're seeking
+                        ic = ic.filter(ImageFilter.BLUR)
+                    im.paste(ic, box)
+                    print(im.info)
+                    im.save(photo,'JPEG')
+
+                    im = Image.open(photo)
+                    width, height = im.size
+                    box = (0, int(height - height / 7), int(width*0.2), height)
+                    ic = im.crop(box)
+                    for i in range(
+                            10):  # with the BLUR filter, you can blur a few times to get the effect you're seeking
+                        ic = ic.filter(ImageFilter.BLUR)
+                    im.paste(ic, box)
+                    print(im.info)
+                    im.save(photo,'JPEG')
+                    upload_file(photo, 'telegram-bot-photos', os.path.basename(photo))
+                    im.close()
+                    try:
+                        await app_user.send_photo(channel.id, photo)
+                    except FloodWait as e:
+                        print('wait for', e.value, 'to send message')
+                        await asyncio.sleep(e.value + 2)
+                        await app_user.send_photo(channel.id, photo)
+                    os.remove(photo)
+                elif mg_id != message.media_group_id:
+                    try:
+                        photo = await app_user.download_media(message)
+                        f = open(photo, 'r')
+                        print(photo)
+                        upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                        f.close()
+                        os.remove(photo)
+                    except Exception as e:
+                        print(e)
+                    try:
+                        await app_user.send_photo(channel.id, message.photo.file_id)
+                    except FloodWait as e:
+                        print('wait for', e.value, 'to send message')
+                        await asyncio.sleep(e.value + 2)
+                        await app_user.send_photo(channel.id, message.photo.file_id)
+                    except Exception as e:
+                        print(e)
+                else:
+                    try:
+                        photo = await app_user.download_media(message)
+                        f = open(photo, 'r')
+                        print(photo)
+                        upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                        f.close()
+                        os.remove(photo)
+                    except Exception as e:
+                        print(e)
+            if message.text and mg_id != message.media_group_id:
                 try:
                     await app_user.send_message(channel.id, message.text)
                     print('text')
@@ -103,16 +174,15 @@ async def create_channel(data, channel, app_user):
             mg_id = message.media_group_id
 
 
-async def create_channels(title, data, app_bot, app_user, CallbackQuery):
-    username = "SBcr_" + slugify(title.replace('https://t.me/', '').replace('joinchat/', '')).replace('-', '_')
-    if len(username) > 35:
-        username = username[:34]
+async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
     file = openpyxl.load_workbook('list.xlsx')
     sheet_obj = file.active
     row = find_cell_by_link(title, sheet_obj)
     if sheet_obj.cell(row=row, column=5).value:
         try:
+            print(sheet_obj.cell(row=row, column=5).value)
             msg = await app_user.get_messages(chat_id=sheet_obj.cell(row=row, column=5).value, message_ids=1)
+            print('1')
         except Exception as e:
             print(e)
         file.close()
@@ -123,18 +193,22 @@ async def create_channels(title, data, app_bot, app_user, CallbackQuery):
     else:
         try:
             channel = await app_user.create_channel(sheet_obj.cell(row=row, column=4).value)
+            sheet_obj.cell(row=row, column=5, value=channel.id)
+            file.save('list.xlsx')
+            file.close()
+            await asyncio.sleep(3)
+            await create_channel(channel, app_user, chat_id)
         except FloodWait as e:
             print('wait for', e.value, "to create channel")
             await app_bot.send_message(CallbackQuery.message.chat.id,
                                        'Почекайте ' + str(e.value) + " секунди щоб створити канал")
             await asyncio.sleep(e.value + 2)
             channel = await app_user.create_channel(sheet_obj.cell(row=row, column=4).value)
-        finally:
             sheet_obj.cell(row=row, column=5, value=channel.id)
             file.save('list.xlsx')
             file.close()
             await asyncio.sleep(3)
-            await create_channel(data, channel, app_user)
+            await create_channel(channel, app_user, chat_id)
 
 
 async def main_group_send_menu(app_bot, app_user, CallbackQuery):
@@ -145,7 +219,7 @@ async def main_group_send_menu(app_bot, app_user, CallbackQuery):
         for g in [el for el in data_ if el.get('category') == c]:
             if g.get('id'):
                 url = await app_user.create_chat_invite_link(g.get('id'))
-                btn_g = InlineKeyboardButton(g.get('name_new'), url=url.invite_link)
+                btn_g = InlineKeyboardButton(g.get('name_new'), url=url.invite_link, )
                 GroupsButtons.append([btn_g])
         await asyncio.sleep(1)
         if GroupsButtons:
@@ -172,32 +246,76 @@ async def main_group_send_menu(app_bot, app_user, CallbackQuery):
     file.save('categories.xlsx')
     file.close()
     await CallbackQuery.answer()
+    await app_bot.send_message(CallbackQuery.message.chat.id,
+                               'Меню надіслане')
 
 
-async def send_new_msg(app_user, message, new_channel_id, CallbackQuery):
+async def send_new_msg(app_user, message, new_channel_id):
     last_mes = await app_user.get_messages(message.chat.id, message.id - 1)
-    mg_id = await app_user.get_messages(message.chat.id, message.id - 1).media_group_id
+    mg_id = await app_user.get_messages(message.chat.id, message.id - 1)
+    mg_id = mg_id.media_group_id
+    if not mg_id and not message.media_group_id:
+        message.media_group_id = 0
+
     if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
         kk = random.randrange(1, 4)
         await asyncio.sleep(kk)
         if message.media_group_id:
+
             try:
                 await app_user.copy_media_group(new_channel_id,
-                                                CallbackQuery.message.chat.id, message.id)
+                                                message.chat.id, message.id)
+                try:
+                    photo = await app_user.download_media(message)
+                    f = open(photo, 'r')
+                    print(photo)
+                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                    f.close()
+                    os.remove(photo)
+                except Exception as e:
+                    print(e)
             except FloodWait as e:
                 print('wait for', e.value, 'to send message')
                 await asyncio.sleep(e.value + 2)
                 await app_user.copy_media_group(new_channel_id,
-                                                CallbackQuery.message.chat.id, message.id)
+                                                message.chat.id, message.id)
+                try:
+                    photo = await app_user.download_media(message)
+                    f = open(photo, 'r')
+                    print(photo)
+                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                    f.close()
+                    os.remove(photo)
+                except Exception as e:
+                    print(e)
             except Exception as e:
                 print(e)
         elif message.photo:
+
             try:
                 await app_user.send_photo(new_channel_id, message.photo.file_id)
+                try:
+                    photo = await app_user.download_media(message)
+                    f = open(photo, 'r')
+                    print(photo)
+                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                    f.close()
+                    os.remove(photo)
+                except Exception as e:
+                    print(e)
             except FloodWait as e:
                 print('wait for', e.value, 'to send message')
                 await asyncio.sleep(e.value + 2)
                 await app_user.send_photo(new_channel_id, message.photo.file_id)
+                try:
+                    photo = await app_user.download_media(message)
+                    f = open(photo, 'r')
+                    print(photo)
+                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
+                    f.close()
+                    os.remove(photo)
+                except Exception as e:
+                    print(e)
             except Exception as e:
                 print(e)
         if message.text:
@@ -210,7 +328,6 @@ async def send_new_msg(app_user, message, new_channel_id, CallbackQuery):
                 await app_user.send_message(new_channel_id, message.text)
             except Exception as e:
                 print(e)
-    await CallbackQuery.answer()
 
 
 async def add_new_category(app_bot, message):
@@ -244,9 +361,9 @@ async def add_new_channel(app_bot, message):
     name = name.split(',')
     if name[0] not in channels:
         try:
-            sheet_obj_n.cell(row, 1, value=name[0])
-            sheet_obj_n.cell(row, 2, value=name[1])
-            sheet_obj_n.cell(row, 4, value=name[2])
+            sheet_obj_n.cell(row, 1, value=name[0].strip())
+            sheet_obj_n.cell(row, 2, value=name[1].strip())
+            sheet_obj_n.cell(row, 4, value=name[2].strip())
             await app_bot.send_message(message.chat.id, 'Канал додано')
 
             file_c.save('list.xlsx')
@@ -265,27 +382,27 @@ async def delete_channel(app_bot, message, CallbackQuery):
     file_c = openpyxl.load_workbook('list.xlsx')
     sheet_obj_n = file_c.active
     # row = find_first_empty(sheet_obj_n)
-    name = message.replace('/delete_channel', '')
+    name = message.replace('//de_ch_app//', '')
     channels = []
+    print(name)
     for i in range(1, find_first_empty(sheet_obj_n)):
         if sheet_obj_n.cell(row=i + 1, column=1).value not in channels:
             channels.append(sheet_obj_n.cell(row=i + 1, column=1).value)
     name = name.replace(' ', '')
-    print(name)
     if name in channels:
         try:
             row = find_cell_by_link(name, sheet_obj_n)
             sheet_obj_n.delete_rows(row, 1)
+            await app_bot.send_message(CallbackQuery.message.chat.id, 'Канал видалено')
         except Exception as e:
             print(e)
             await app_bot.send_message(CallbackQuery.message.chat.id, 'Помилка при видаленні')
-
         file_c.save('list.xlsx')
         file_c.close()
-        await app_bot.send_message(CallbackQuery.message.chat.id, 'Канал видалено')
     else:
         await app_bot.send_message(CallbackQuery.message.chat.id, 'Немає такого каналу')
     await CallbackQuery.answer()
+
     await asyncio.sleep(3)
 
 
@@ -293,12 +410,12 @@ async def delete_category(app_bot, message, CallbackQuery):
     file_c = openpyxl.load_workbook('categories.xlsx')
     sheet_obj_n = file_c.active
     # row = find_first_empty(sheet_obj_n)
+
     name = message.replace('/delete_category', '').strip()
     categories = []
     for i in range(find_first_empty(sheet_obj_n)):
         if sheet_obj_n.cell(row=i + 1, column=1).value not in categories:
             categories.append(sheet_obj_n.cell(row=i + 1, column=1).value)
-    name = name
     print(name)
     deleted = False
     if name in categories:
@@ -306,13 +423,13 @@ async def delete_category(app_bot, message, CallbackQuery):
             row = find_cell_by_link(name, sheet_obj_n)
             sheet_obj_n.delete_rows(row, 1)
             deleted = True
+            await app_bot.send_message(CallbackQuery.message.chat.id, 'Категорія видалена')
         except Exception as e:
             print(e)
             await app_bot.send_message(CallbackQuery.message.chat.id, 'Помилка при видаленні')
         file_c.save('categories.xlsx')
         file_c.close()
 
-        await app_bot.send_message(CallbackQuery.message.chat.id, 'Категорія видалена')
         print(deleted)
         if deleted:
             file_c = openpyxl.load_workbook('list.xlsx')
