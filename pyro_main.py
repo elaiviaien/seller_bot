@@ -24,7 +24,7 @@ def find_first_empty(self):
             return r
 
 
-main_group_id = 'Turk_0pt'
+main_group_id = 'seller_channel_haha'
 
 file_ = openpyxl.load_workbook('list.xlsx')
 sheet_obj_ = file_.active

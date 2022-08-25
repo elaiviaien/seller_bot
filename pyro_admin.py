@@ -7,10 +7,11 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from pyro_main import main_group_send_menu, main_create, send_new_msg, find_first_empty, add_new_category, \
     add_new_channel, delete_channel, delete_category, main_group_delete_menu, find_cell_by_link, ids, find_cell_by_id
-admins = ['5582299570','391275835','763020856']
 
-api_id = 12498116
-api_hash = "4e18f9670b086f276529be52f7f7f1a9"
+admins = ['5582299570', '391275835', '763020856']
+proc = False
+api_id = 10736822
+api_hash = "3a730347f1f410c6d8491fbfaed0add9"
 app_bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token='5699702175:AAEVQ_8UtAo4cnSnznVVu1QoamSB6kRCF0M')
 app_user = Client("my_account", api_id=api_id, api_hash=api_hash)
 file_ = openpyxl.load_workbook('list.xlsx')
@@ -29,49 +30,51 @@ file_.close()
 
 
 async def join_and_write(CallbackQuery):
+    global proc
+    proc = True
     file_c = openpyxl.load_workbook('list.xlsx')
     sheet_obj_c = file_c.active
     channels = [sheet_obj_c.cell(row=i + 1, column=1).value for i in range(1, find_first_empty(sheet_obj_c) - 1)]
-    for i in range(len(channels)):
-        try:
-            if "+" in channels[i]:
-                print(channels[i])
-                channels.append(channels[i])
-                join = await app_user.join_chat(channels[i])
-                row = find_cell_by_link(channels[i], sheet_obj_c)
-                sheet_obj_c.cell(row, 6, value=join.id)
-                file_c.save('list.xlsx')
-            else:
-                print(channels[i].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'))
-                name = channels[i].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
-                channels.append(name)
-                join = await app_user.join_chat(name)
-                row = find_cell_by_link(channels[i], sheet_obj_c)
-                sheet_obj_c.cell(row, 6, value=join.id)
-                file_c.save('list.xlsx')
-        except FloodWait as ew:
-            print('wait', ew.value)
-            await asyncio.sleep(ew.value + 2)
-            if "+" in channels[i]:
-                print(channels[i])
-                channels.append(channels[i])
-                join = await app_user.join_chat(channels[i])
-                row = find_cell_by_link(channels[i], sheet_obj_c)
-                sheet_obj_c.cell(row, 6, value=join.id)
-                file_c.save('list.xlsx')
-            else:
-                print(channels[i].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'))
-                name = channels[i].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
-                channels.append(name)
-                join = await app_user.join_chat(name)
-                row = find_cell_by_link(channels[i], sheet_obj_c)
-                sheet_obj_c.cell(row, 6, value=join.id)
-                file_c.save('list.xlsx')
-        except Exception as e:
-            print(e)
-        await asyncio.sleep(5)
+    for k in range(len(channels)):
+        if not sheet_obj_c.cell(find_cell_by_link(channels[k], sheet_obj_c), 6).value:
+            try:
+                if "+" in channels[k]:
+                    print(channels[k])
+                    channels.append(channels[k])
+                    row = find_cell_by_link(channels[k], sheet_obj_c)
+
+                    join = await app_user.join_chat(channels[k])
+                    sheet_obj_c.cell(row, 6, value=join.id)
+                    file_c.save('list.xlsx')
+                else:
+                    print(channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'))
+                    name = channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
+                    row = find_cell_by_link(channels[k], sheet_obj_c)
+                    join = await app_user.join_chat(name)
+                    sheet_obj_c.cell(row, 6, value=join.id)
+                    file_c.save('list.xlsx')
+            except FloodWait as ew:
+                print('wait', ew.value)
+                await asyncio.sleep(ew.value + 2)
+                if "+" in channels[k]:
+                    print(channels[k])
+                    row = find_cell_by_link(channels[k], sheet_obj_c)
+                    join = await app_user.join_chat(channels[k])
+                    sheet_obj_c.cell(row, 6, value=join.id)
+                    file_c.save('list.xlsx')
+                else:
+                    print(channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_'))
+                    name = channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
+                    row = find_cell_by_link(channels[k], sheet_obj_c)
+                    join = await app_user.join_chat(name)
+                    sheet_obj_c.cell(row, 6, value=join.id)
+                    file_c.save('list.xlsx')
+            except Exception as e:
+                print("exception:",e)
+            await asyncio.sleep(30)
     file_c.close()
     await main_create(app_bot, app_user, CallbackQuery)
+    proc = False
     return channels
 
 
@@ -185,7 +188,7 @@ async def send_bot_categories(app_bot, app_user, callback):
     await callback.edit_message_text('**Категорії**', reply_markup=MainMarkup)
 
 
-@app_bot.on_message(filters.command('start') & filters.private & filters.create(lambda self, c, m: (str(m.from_user.id) in admins)))
+@app_bot.on_message(filters.command('start') & filters.private)
 async def on_start(app_bot, message):
     MainButtons = [[InlineKeyboardButton('Головний канал', callback_data='//main_channel//'),
                     InlineKeyboardButton('Категорії', callback_data='//categories//')],
@@ -195,12 +198,14 @@ async def on_start(app_bot, message):
     await app_bot.send_message(message.chat.id, '**Головне меню**', reply_markup=MainMarkup)
 
 
-@app_bot.on_message(filters.command('add_category') & filters.private & filters.create(lambda self, c, m: (str(m.from_user.id) in admins)))
+@app_bot.on_message(filters.command('add_category') & filters.private & filters.create(
+    lambda self, c, m: (str(m.from_user.id) in admins)))
 async def add_category(app_bot, message):
     await add_new_category(app_bot, message)
 
 
-@app_bot.on_message(filters.command('add_channel') & filters.private & filters.create(lambda self, c, m: (str(m.from_user.id) in admins)))
+@app_bot.on_message(filters.command('add_channel') & filters.private & filters.create(
+    lambda self, c, m: (str(m.from_user.id) in admins)))
 async def add_category(app_bot, message):
     await add_new_channel(app_bot, message)
 
@@ -239,7 +244,8 @@ async def callback_query(app_bot, CallbackQuery):
     elif CallbackQuery.data == '//delete_category//':
         Btns = []
         for c in return_categories():
-            Btns.append([InlineKeyboardButton(c + '| Видалити', callback_data='//delete_category_approve//' + c)])
+            if c != 'Категорії':
+                Btns.append([InlineKeyboardButton(c + '| Видалити', callback_data='//delete_category_approve//' + c)])
         Btns.append([InlineKeyboardButton('Головне меню', callback_data='//main_menu//')])
         await CallbackQuery.edit_message_text('**Оберіть категорії**', reply_markup=InlineKeyboardMarkup(Btns))
     elif '//delete_category_approve//' in CallbackQuery.data:
@@ -278,8 +284,10 @@ async def callback_query(app_bot, CallbackQuery):
         await send_bot_menu(app_bot, CallbackQuery)
 
     elif CallbackQuery.data == '//create_channels//':
-        await join_and_write(CallbackQuery)
-        await asyncio.sleep(2)
+        global proc
+        if not proc:
+            await join_and_write(CallbackQuery)
+            await asyncio.sleep(2)
 
 
 app_user.start()
