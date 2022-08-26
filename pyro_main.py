@@ -6,7 +6,6 @@ import openpyxl
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from PIL import Image, ImageFilter
 
-from photos import upload_file
 
 def ids():
     file_c = openpyxl.load_workbook('list.xlsx')
@@ -24,7 +23,7 @@ def find_first_empty(self):
             return r
 
 
-main_group_id = 'seller_channel_haha'
+main_group_id = 'Turk_0pt'
 
 file_ = openpyxl.load_workbook('list.xlsx')
 sheet_obj_ = file_.active
@@ -77,101 +76,63 @@ async def main_create(app_bot, app_user, CallbackQuery):
 
 
 async def create_channel(channel, app_user, chat_id):
-    await app_user.promote_chat_member(channel.id, "seller_test_s_bot")
+    await app_user.promote_chat_member(channel.id, "Turk_0ptbot")
     last_mes = None
     mg_id = 0
     async for message in app_user.get_chat_history(
             chat_id):
         if not last_mes:
             last_mes = message
-        if message.photo or last_mes.photo or last_mes.media_group_id:
+        if not mg_id and not message.media_group_id:
+            message.media_group_id = 0
+
+        if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
             last_mes = message
-            kk = random.randrange(1, 4)
-            await asyncio.sleep(kk)
-            if message.media_group_id and message.chat.id != -1001478074210 and mg_id != message.media_group_id:
+            if message.media_group_id:
+
                 try:
                     await app_user.copy_media_group(channel.id,
-                                                    chat_id, message.id)
+                                                    message.chat.id, message.id)
+                    kk = random.randrange(10, 30)
+                    await asyncio.sleep(kk)
                 except FloodWait as e:
                     print('wait for', e.value, 'to send message')
                     await asyncio.sleep(e.value + 2)
                     await app_user.copy_media_group(channel.id,
-                                                    chat_id, message.id)
+                                                    message.chat.id, message.id)
+                    kk = random.randrange(10, 30)
+                    await asyncio.sleep(kk)
                 except Exception as e:
                     print(e)
-                mg_id = message.media_group_id
             elif message.photo:
-                if message.chat.id == -1001478074210 and mg_id == message.media_group_id:
-                    photo = await app_user.download_media(message)
-                    im = Image.open(photo)
-                    width, height = im.size
-                    box = (int(width * 0.8), int(height - height / 8), width, height)
-                    ic = im.crop(box)
-                    for i in range(
-                            10):  # with the BLUR filter, you can blur a few times to get the effect you're seeking
-                        ic = ic.filter(ImageFilter.BLUR)
-                    im.paste(ic, box)
-                    print(im.info)
-                    im.save(photo,'JPEG')
 
-                    im = Image.open(photo)
-                    width, height = im.size
-                    box = (0, int(height - height / 7), int(width*0.2), height)
-                    ic = im.crop(box)
-                    for i in range(
-                            10):  # with the BLUR filter, you can blur a few times to get the effect you're seeking
-                        ic = ic.filter(ImageFilter.BLUR)
-                    im.paste(ic, box)
-                    print(im.info)
-                    im.save(photo,'JPEG')
-                    upload_file(photo, 'telegram-bot-photos', os.path.basename(photo))
-                    im.close()
-                    try:
-                        await app_user.send_photo(channel.id, photo)
-                    except FloodWait as e:
-                        print('wait for', e.value, 'to send message')
-                        await asyncio.sleep(e.value + 2)
-                        await app_user.send_photo(channel.id, photo)
-                    os.remove(photo)
-                elif mg_id != message.media_group_id:
-                    try:
-                        photo = await app_user.download_media(message)
-                        f = open(photo, 'r')
-                        print(photo)
-                        upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                        f.close()
-                        os.remove(photo)
-                    except Exception as e:
-                        print(e)
-                    try:
-                        await app_user.send_photo(channel.id, message.photo.file_id)
-                    except FloodWait as e:
-                        print('wait for', e.value, 'to send message')
-                        await asyncio.sleep(e.value + 2)
-                        await app_user.send_photo(channel.id, message.photo.file_id)
-                    except Exception as e:
-                        print(e)
-                else:
-                    try:
-                        photo = await app_user.download_media(message)
-                        f = open(photo, 'r')
-                        print(photo)
-                        upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                        f.close()
-                        os.remove(photo)
-                    except Exception as e:
-                        print(e)
-            if message.text and mg_id != message.media_group_id:
+                try:
+                    await app_user.send_photo(channel.id, message.photo.file_id)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except FloodWait as e:
+                    print('wait for', e.value, 'to send message')
+                    await asyncio.sleep(e.value + 2)
+                    await app_user.send_photo(channel.id, message.photo.file_id)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except Exception as e:
+                    print(e)
+            if message.text:
                 try:
                     await app_user.send_message(channel.id, message.text)
                     print('text')
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
                 except FloodWait as e:
                     print('wait for', e.value, 'to send message')
                     await asyncio.sleep(e.value + 2)
                     await app_user.send_message(channel.id, message.text)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
                 except Exception as e:
                     print(e)
-            mg_id = message.media_group_id
+        mg_id = message.media_group_id
 
 
 async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
@@ -265,57 +226,21 @@ async def send_new_msg(app_user, message, new_channel_id):
             try:
                 await app_user.copy_media_group(new_channel_id,
                                                 message.chat.id, message.id)
-                try:
-                    photo = await app_user.download_media(message)
-                    f = open(photo, 'r')
-                    print(photo)
-                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                    f.close()
-                    os.remove(photo)
-                except Exception as e:
-                    print(e)
             except FloodWait as e:
                 print('wait for', e.value, 'to send message')
                 await asyncio.sleep(e.value + 2)
                 await app_user.copy_media_group(new_channel_id,
                                                 message.chat.id, message.id)
-                try:
-                    photo = await app_user.download_media(message)
-                    f = open(photo, 'r')
-                    print(photo)
-                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                    f.close()
-                    os.remove(photo)
-                except Exception as e:
-                    print(e)
             except Exception as e:
                 print(e)
         elif message.photo:
 
             try:
                 await app_user.send_photo(new_channel_id, message.photo.file_id)
-                try:
-                    photo = await app_user.download_media(message)
-                    f = open(photo, 'r')
-                    print(photo)
-                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                    f.close()
-                    os.remove(photo)
-                except Exception as e:
-                    print(e)
             except FloodWait as e:
                 print('wait for', e.value, 'to send message')
                 await asyncio.sleep(e.value + 2)
                 await app_user.send_photo(new_channel_id, message.photo.file_id)
-                try:
-                    photo = await app_user.download_media(message)
-                    f = open(photo, 'r')
-                    print(photo)
-                    upload_file(photo, 'telegram-bot-photos', os.path.basename(f.name))
-                    f.close()
-                    os.remove(photo)
-                except Exception as e:
-                    print(e)
             except Exception as e:
                 print(e)
         if message.text:

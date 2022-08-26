@@ -10,9 +10,9 @@ from pyro_main import main_group_send_menu, main_create, send_new_msg, find_firs
 
 admins = ['5582299570', '391275835', '763020856']
 proc = False
-api_id = 10736822
-api_hash = "3a730347f1f410c6d8491fbfaed0add9"
-app_bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token='5699702175:AAEVQ_8UtAo4cnSnznVVu1QoamSB6kRCF0M')
+api_id = 9623615
+api_hash = "3c140a06291f4370d168bc0f79a53741"
+app_bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token='5484106449:AAE7dylp6740RKXl4tXYjiap-99W7hmTt88')
 app_user = Client("my_account", api_id=api_id, api_hash=api_hash)
 file_ = openpyxl.load_workbook('list.xlsx')
 sheet_obj_ = file_.active
