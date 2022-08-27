@@ -80,7 +80,7 @@ async def create_channel(channel, app_user, chat_id):
     last_mes = None
     mg_id = 0
     async for message in app_user.get_chat_history(
-            chat_id):
+            chat_id,limit=10000):
         if not last_mes:
             last_mes = message
         if not mg_id and not message.media_group_id:
@@ -89,7 +89,6 @@ async def create_channel(channel, app_user, chat_id):
         if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
             last_mes = message
             if message.media_group_id:
-
                 try:
                     await app_user.copy_media_group(channel.id,
                                                     message.chat.id, message.id)
