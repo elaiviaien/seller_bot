@@ -24,7 +24,6 @@ def find_first_empty(self):
 
 
 main_group_id = 'Turk_0pt'
-
 file_ = openpyxl.load_workbook('list.xlsx')
 sheet_obj_ = file_.active
 categories = []
@@ -37,14 +36,26 @@ data_ = [({
     'category': sheet_obj_.cell(row=i + 1, column=2).value,
     'name_new': sheet_obj_.cell(row=i + 1, column=4).value,
     'id': sheet_obj_.cell(row=i + 1, column=5).value,
-}) for i in range(1, find_first_empty(sheet_obj_))]
+}) for i in range(1, find_first_empty(sheet_obj_) - 1)]
 
 for i in range(find_first_empty(sheet_obj_categories) - 1):
     if sheet_obj_categories.cell(row=i + 1, column=1).value not in categories:
         categories.append(sheet_obj_categories.cell(row=i + 1, column=1).value)
 
-file_categories.close()
-file_.close()
+
+def return_data_():
+    file_ = openpyxl.load_workbook('list.xlsx')
+    sheet_obj_ = file_.active
+    file_categories = openpyxl.load_workbook('categories.xlsx')
+    data_ = [({
+        'channel': sheet_obj_.cell(row=i + 1, column=1).value,
+        'category': sheet_obj_.cell(row=i + 1, column=2).value,
+        'name_new': sheet_obj_.cell(row=i + 1, column=4).value,
+        'id': sheet_obj_.cell(row=i + 1, column=5).value,
+    }) for i in range(1, find_first_empty(sheet_obj_) - 1)]
+    file_categories.close()
+    file_.close()
+    return data_
 
 
 def find_cell_by_link(v, sheet_obj):
@@ -64,13 +75,11 @@ def find_cell_by_id(v, sheet_obj):
 
 
 async def main_create(app_bot, app_user, CallbackQuery):
-    global data_
     ids_ = ids()
-    for i in range(len(data_)):
+    for i in range(len(return_data_())):
         print('iter')
         await asyncio.sleep(10)
         await create_channels(data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
-    await CallbackQuery.answer()
     await app_bot.send_message(CallbackQuery.message.chat.id,
                                'Канали створені')
 
@@ -80,7 +89,7 @@ async def create_channel(channel, app_user, chat_id):
     last_mes = None
     mg_id = 0
     async for message in app_user.get_chat_history(
-            chat_id,limit=10000):
+            chat_id, limit=10000):
         if not last_mes:
             last_mes = message
         if not mg_id and not message.media_group_id:
@@ -172,11 +181,11 @@ async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
 
 
 async def main_group_send_menu(app_bot, app_user, CallbackQuery):
-    global main_group_id, data_
+    global main_group_id
     CategoriesButtons = []
     for c in categories:
         GroupsButtons = []
-        for g in [el for el in data_ if el.get('category') == c]:
+        for g in [el for el in return_data_() if el.get('category') == c]:
             if g.get('id'):
                 url = await app_user.create_chat_invite_link(g.get('id'))
                 btn_g = InlineKeyboardButton(g.get('name_new'), url=url.invite_link, )
@@ -205,7 +214,6 @@ async def main_group_send_menu(app_bot, app_user, CallbackQuery):
     sheet_obj.cell(row=row, column=2, value=cat_m.link)
     file.save('categories.xlsx')
     file.close()
-    await CallbackQuery.answer()
     await app_bot.send_message(CallbackQuery.message.chat.id,
                                'Меню надіслане')
 
@@ -365,7 +373,6 @@ async def delete_category(app_bot, message, CallbackQuery):
             file_c.close()
     else:
         await app_bot.send_message(CallbackQuery.message.chat.id, 'Немає такої категорії')
-    await CallbackQuery.answer()
     await asyncio.sleep(3)
 
 
@@ -377,5 +384,4 @@ async def main_group_delete_menu(app_user, CallbackQuery):
         if sheet_obj_n.cell(i, 2).value:
             menu_msgs.append(int(sheet_obj_n.cell(i, 2).value.split('/')[-1]))
     await app_user.delete_messages(main_group_id, menu_msgs)
-    await CallbackQuery.answer()
     await asyncio.sleep(3)

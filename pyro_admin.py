@@ -245,19 +245,19 @@ async def callback_query(app_bot, CallbackQuery):
         Btns = []
         for c in return_categories():
             if c != 'Категорії':
-                Btns.append([InlineKeyboardButton(c + '| Видалити', callback_data='//delete_category_approve//' + c)])
+                Btns.append([InlineKeyboardButton(c + '| Видалити', callback_data='//delete_c_a//' + c)])
         Btns.append([InlineKeyboardButton('Головне меню', callback_data='//main_menu//')])
         await CallbackQuery.edit_message_text('**Оберіть категорії**', reply_markup=InlineKeyboardMarkup(Btns))
-    elif '//delete_category_approve//' in CallbackQuery.data:
+    elif '//delete_c_a//' in CallbackQuery.data:
         Btns = [
             [InlineKeyboardButton('Головне меню', callback_data='//main_menu//')],
             [InlineKeyboardButton('Видалити',
-                                  callback_data='//delete_category_approved//' + CallbackQuery.data.split('//')[-1])]
+                                  callback_data='//delete_c_ad//' + CallbackQuery.data.split('//')[-1])]
         ]
         await CallbackQuery.edit_message_text(
             '***Ви впевнені, що хочете видалити категорію? Разом з нею видаляться усі канали з якими вона зв\'язана***',
             reply_markup=InlineKeyboardMarkup(Btns))
-    elif '//delete_category_approved//' in CallbackQuery.data:
+    elif '//delete_c_ad//' in CallbackQuery.data:
         await delete_category(app_bot, CallbackQuery.data.split('//')[-1], CallbackQuery)
         await send_bot_menu(app_bot, CallbackQuery)
     elif CallbackQuery.data == '//add_channel//':
