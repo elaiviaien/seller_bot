@@ -10,8 +10,8 @@ from pyro_main import main_group_send_menu, main_create, send_new_msg, find_firs
 
 admins = ['5582299570', '391275835', '763020856']
 proc = False
-api_id = 9623615
-api_hash = "3c140a06291f4370d168bc0f79a53741"
+api_id = 12498116
+api_hash = "4e18f9670b086f276529be52f7f7f1a9"
 app_bot = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token='5484106449:AAE7dylp6740RKXl4tXYjiap-99W7hmTt88')
 app_user = Client("my_account", api_id=api_id, api_hash=api_hash)
 file_ = openpyxl.load_workbook('list.xlsx')
@@ -161,7 +161,8 @@ async def send_bot_menu(app_bot, callback):
 
 async def send_bot_main_channel(app_bot, app_user, callback):
     MainButtons = [[InlineKeyboardButton('Надіслати меню', callback_data='//send_menu//'),
-                    InlineKeyboardButton('Видалити меню', callback_data='//delete_menu//')],
+                    # InlineKeyboardButton('Видалити меню', callback_data='//delete_menu//')
+                    ],
                    [InlineKeyboardButton('Головне меню', callback_data='//main_menu//')]
                    ]
     MainMarkup = InlineKeyboardMarkup(MainButtons)
@@ -188,7 +189,8 @@ async def send_bot_categories(app_bot, app_user, callback):
     await callback.edit_message_text('**Категорії**', reply_markup=MainMarkup)
 
 
-@app_bot.on_message(filters.command('start') & filters.private)
+@app_bot.on_message(filters.command('start') & filters.private & filters.create(
+    lambda self, c, m: (str(m.from_user.id) in admins)))
 async def on_start(app_bot, message):
     MainButtons = [[InlineKeyboardButton('Головний канал', callback_data='//main_channel//'),
                     InlineKeyboardButton('Категорії', callback_data='//categories//')],
@@ -236,8 +238,8 @@ async def callback_query(app_bot, CallbackQuery):
         await send_bot_main_channel(app_bot, app_user, CallbackQuery)
     elif CallbackQuery.data == '//send_menu//':
         await main_group_send_menu(app_bot, app_user, CallbackQuery)
-    elif CallbackQuery.data == '//delete_menu//':
-        await main_group_delete_menu(app_user, CallbackQuery)
+    # elif CallbackQuery.data == '//delete_menu//':
+    #     await main_group_delete_menu(app_user, CallbackQuery)
     elif CallbackQuery.data == '//add_category//':
         await app_bot.send_message(CallbackQuery.message.chat.id, '**Надрукуйте `/add_category ваша_назва_категорії`**')
         await CallbackQuery.answer()

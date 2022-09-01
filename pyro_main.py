@@ -185,27 +185,44 @@ async def main_group_send_menu(app_bot, app_user, CallbackQuery):
     CategoriesButtons = []
     for c in categories:
         GroupsButtons = []
+        cc = 0
         for g in [el for el in return_data_() if el.get('category') == c]:
-            if g.get('id'):
+            if g.get('id') and cc<9:
+                cc+=1
                 url = await app_user.create_chat_invite_link(g.get('id'))
                 btn_g = InlineKeyboardButton(g.get('name_new'), url=url.invite_link, )
                 GroupsButtons.append([btn_g])
+
         await asyncio.sleep(1)
         if GroupsButtons:
             msg = await app_bot.send_message(main_group_id, c, reply_markup=InlineKeyboardMarkup(GroupsButtons))
             file = openpyxl.load_workbook('categories.xlsx')
             sheet_obj = file.active
             row = find_cell_by_link(c, sheet_obj)
-
             sheet_obj.cell(row=row, column=2, value=msg.link)
             file.save('categories.xlsx')
             file.close()
             print(sheet_obj.cell(row=row, column=2).value)
             btn = InlineKeyboardButton(c, url=msg.link)
             CategoriesButtons.append([btn])
+        cc_n= 0
+        GroupsButtons = []
+        for g in [el for el in return_data_() if el.get('category') == c]:
+            cc_n+=1
+            if g.get('id') and 9 <= cc_n:
+                url = await app_user.create_chat_invite_link(g.get('id'))
+                btn_g = InlineKeyboardButton(g.get('name_new'), url=url.invite_link, )
+                GroupsButtons.append([btn_g])
+        await asyncio.sleep(1)
+        if GroupsButtons:
+            msg = await app_bot.send_message(main_group_id, c, reply_markup=InlineKeyboardMarkup(GroupsButtons))
     CategoriesMarkup = InlineKeyboardMarkup(
         CategoriesButtons
     )
+
+
+
+
 
     cat_m = await app_bot.send_message(main_group_id, 'Категорії', reply_markup=CategoriesMarkup)
     file = openpyxl.load_workbook('categories.xlsx')
