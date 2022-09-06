@@ -95,7 +95,7 @@ async def create_channel(channel, app_user, chat_id):
         if not mg_id and not message.media_group_id:
             message.media_group_id = 0
 
-        if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
+        if (message.photo or message.video or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
             last_mes = message
             if message.media_group_id:
                 try:
@@ -155,7 +155,7 @@ async def create_channel(channel, app_user, chat_id):
                     print(e)
             if message.caption:
                 try:
-                    await app_user.send_message(channel.id, message.captionм)
+                    await app_user.send_message(channel.id, message.caption)
                     print('text')
                     kk = random.randrange(1, 10)
                     await asyncio.sleep(kk)
