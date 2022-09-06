@@ -79,7 +79,7 @@ async def main_create(app_bot, app_user, CallbackQuery):
     for i in range(len(return_data_())):
         print('iter')
         await asyncio.sleep(10)
-        await create_channels(return_data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
+        await create_channels(return_data_()[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
     await app_bot.send_message(CallbackQuery.message.chat.id,
                                'Канали створені')
 

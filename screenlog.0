@@ -5092,3 +5092,15 @@ https://t.me/Turk_0pt/185
 6
 6
 2
+iter
+'function' object is not subscriptable
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "pyro_admin.py", line 291, in callback_query
+    await join_and_write(CallbackQuery)
+  File "pyro_admin.py", line 76, in join_and_write
+    await main_create(app_bot, app_user, CallbackQuery)
+  File "/root/seller_bot/pyro_main.py", line 82, in main_create
+    await create_channels(return_data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
+TypeError: 'function' object is not subscriptable
