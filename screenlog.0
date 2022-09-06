@@ -4030,3 +4030,1065 @@ text
 text
 text
 text
+https://t.me/Turk_0pt/121
+https://t.me/Turk_0pt/122
+https://t.me/Turk_0pt/123
+https://t.me/Turk_0pt/125
+https://t.me/Turk_0pt/127
+https://t.me/Turk_0pt/128
+https://t.me/Turk_0pt/129
+https://t.me/Turk_0pt/130
+https://t.me/Turk_0pt/131
+text
+text
+text
+text
+text
+text
+https://t.me/Turk_0pt/133
+https://t.me/Turk_0pt/134
+https://t.me/Turk_0pt/135
+https://t.me/Turk_0pt/137
+https://t.me/Turk_0pt/139
+https://t.me/Turk_0pt/140
+https://t.me/Turk_0pt/141
+https://t.me/Turk_0pt/142
+https://t.me/Turk_0pt/143
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists
+iter
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+text
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+text
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+text
+-1001693108317
+1
+channel exists
+iter
+6
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+Welcome to Pyrogram (version 2.0.41)
+Pyrogram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed
+under the terms of the GNU Lesser General Public License v3.0 (LGPL-3.0).
+
+Enter phone number or bot token: +380730763871
+Is "+380730763871" correct? (y/N): y
+Traceback (most recent call last):
+  File "pyro_admin.py", line 295, in <module>
+    app_user.start()
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/sync.py", line 66, in async_to_sync_wrap
+    return loop.run_until_complete(coroutine)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/utilities/start.py", line 62, in start
+    await self.authorize()
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/client.py", line 325, in authorize
+    sent_code = await self.send_code(self.phone_number)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/auth/send_code.py", line 52, in send_code
+    r = await self.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/advanced/invoke.py", line 77, in invoke
+    r = await self.session.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 361, in invoke
+    return await self.send(query, timeout=timeout)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 331, in send
+    RPCError.raise_it(result, type(data))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/errors/rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.flood_420.FloodWait: Telegram says: [420 FLOOD_WAIT_X] - A wait of 8414 seconds is required (caused by "auth.SendCode")
+Welcome to Pyrogram (version 2.0.41)
+Pyrogram is free software and comes with ABSOLUTELY NO WARRANTY. Licensed
+under the terms of the GNU Lesser General Public License v3.0 (LGPL-3.0).
+
+Enter phone number or bot token: +380730763871
+Is "+380730763871" correct? (y/N): y
+The confirmation code has been sent via Telegram app
+Enter confirmation code: 77714
+[my_account] Waiting for 4 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 4 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+https://t.me/Turk_0pt/150
+https://t.me/Turk_0pt/151
+https://t.me/Turk_0pt/152
+https://t.me/Turk_0pt/154
+https://t.me/Turk_0pt/156
+https://t.me/Turk_0pt/157
+https://t.me/Turk_0pt/158
+https://t.me/Turk_0pt/159
+https://t.me/Turk_0pt/160
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+[my_account] Waiting for 7 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 7 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 7 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 7 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 7 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 14 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 10 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 10 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 10 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 9 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 23 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 23 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 23 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 16 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 16 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 4 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 22 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 21 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.SendMultiMedia")
+[my_account] Waiting for 19 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 18 seconds before continuing (required by "channels.GetMessages")
+[my_account] Waiting for 16 seconds before continuing (required by "channels.GetMessages")
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+text
+Unclosed tags: <i> (x1)
+text
+https://t.me/Turk_0pt/163
+https://t.me/Turk_0pt/164
+https://t.me/Turk_0pt/165
+[my_account] Waiting for 3 seconds before continuing (required by "messages.ExportChatInvite")
+https://t.me/Turk_0pt/167
+https://t.me/Turk_0pt/169
+https://t.me/Turk_0pt/170
+https://t.me/Turk_0pt/171
+https://t.me/Turk_0pt/172
+https://t.me/Turk_0pt/173
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists
+iter
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+-1001693108317
+1
+channel exists
+iter
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists
+iter
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+-1001693108317
+1
+channel exists
+iter
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists
+iter
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+-1001693108317
+1
+channel exists
+iter
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+iter
+list index out of range
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "pyro_admin.py", line 291, in callback_query
+    await join_and_write(CallbackQuery)
+  File "pyro_admin.py", line 76, in join_and_write
+    await main_create(app_bot, app_user, CallbackQuery)
+  File "/root/seller_bot/pyro_main.py", line 82, in main_create
+    await create_channels(data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
+IndexError: list index out of range
+https://t.me/Turk_0pt/175
+https://t.me/Turk_0pt/176
+https://t.me/Turk_0pt/177
+https://t.me/Turk_0pt/179
+https://t.me/Turk_0pt/181
+https://t.me/Turk_0pt/182
+https://t.me/Turk_0pt/183
+https://t.me/Turk_0pt/184
+https://t.me/Turk_0pt/185
+6
+6
+6
+6
+6
+6
+6
+6
+6
+2
+6
+6
+6
+6
+6
+6
+6
+6
+6
+2
+6
+6
+6
+6
+6
+6
+6
+6
+6
+2
+6
+6
+6
+6
+6
+6
+6
+6
+6
+2
