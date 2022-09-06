@@ -36,14 +36,15 @@ async def join_and_write(CallbackQuery):
     sheet_obj_c = file_c.active
     channels = [sheet_obj_c.cell(row=i + 1, column=1).value for i in range(1, find_first_empty(sheet_obj_c) - 1)]
     for k in range(len(channels)):
+        print(channels[k])
         if not sheet_obj_c.cell(find_cell_by_link(channels[k], sheet_obj_c), 6).value:
             try:
                 if "+" in channels[k]:
-                    print(channels[k])
                     channels.append(channels[k])
                     row = find_cell_by_link(channels[k], sheet_obj_c)
 
                     join = await app_user.join_chat(channels[k])
+                    print('join id '+str(join.id))
                     sheet_obj_c.cell(row, 6, value=join.id)
                     file_c.save('list.xlsx')
                 else:
@@ -51,6 +52,7 @@ async def join_and_write(CallbackQuery):
                     name = channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
                     row = find_cell_by_link(channels[k], sheet_obj_c)
                     join = await app_user.join_chat(name)
+                    print('join id '+str(join.id))
                     sheet_obj_c.cell(row, 6, value=join.id)
                     file_c.save('list.xlsx')
             except FloodWait as ew:
@@ -60,6 +62,7 @@ async def join_and_write(CallbackQuery):
                     print(channels[k])
                     row = find_cell_by_link(channels[k], sheet_obj_c)
                     join = await app_user.join_chat(channels[k])
+                    print('join id '+str(join.id))
                     sheet_obj_c.cell(row, 6, value=join.id)
                     file_c.save('list.xlsx')
                 else:
@@ -67,6 +70,7 @@ async def join_and_write(CallbackQuery):
                     name = channels[k].replace('https://t.me/', '').replace('joinchat/', '').replace('-', '_')
                     row = find_cell_by_link(channels[k], sheet_obj_c)
                     join = await app_user.join_chat(name)
+                    print('join id '+str(join.id))
                     sheet_obj_c.cell(row, 6, value=join.id)
                     file_c.save('list.xlsx')
             except Exception as e:

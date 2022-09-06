@@ -178,7 +178,6 @@ async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
         try:
             print(sheet_obj.cell(row=row, column=5).value)
             msg = await app_user.get_messages(chat_id=sheet_obj.cell(row=row, column=5).value, message_ids=1)
-            print('1')
         except Exception as e:
             print(e)
         file.close()

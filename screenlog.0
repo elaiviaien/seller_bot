@@ -5284,3 +5284,401 @@ iter
 -1001775386712
 1
 channel exists
+https://t.me/Turk_0pt/187
+https://t.me/Turk_0pt/188
+https://t.me/Turk_0pt/189
+https://t.me/Turk_0pt/191
+https://t.me/Turk_0pt/193
+https://t.me/Turk_0pt/194
+https://t.me/Turk_0pt/195
+https://t.me/Turk_0pt/196
+https://t.me/Turk_0pt/197
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+6
+https://t.me/meshureluxuryshoes
+meshureluxuryshoes
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+text
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+-1001693108317
+1
+channel exists
+iter
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+iter
+text
+text
+text
+text
+text
+text
+text
+6
+text
+https://t.me/Turk_0pt/199
+https://t.me/Turk_0pt/200
+https://t.me/Turk_0pt/201
+https://t.me/Turk_0pt/203
+https://t.me/Turk_0pt/204
+https://t.me/Turk_0pt/205
+[my_account] Waiting for 3 seconds before continuing (required by "messages.ExportChatInvite")
+https://t.me/Turk_0pt/207
+https://t.me/Turk_0pt/208
+https://t.me/Turk_0pt/209
+https://t.me/Turk_0pt/210
+https://t.me/Turk_0pt/212
+https://t.me/Turk_0pt/213
+[my_account] Waiting for 3 seconds before continuing (required by "messages.ExportChatInvite")
+https://t.me/Turk_0pt/214
+https://t.me/Turk_0pt/217
+https://t.me/Turk_0pt/218
+Telegram says: [420 FLOOD_WAIT_X] - A wait of 24 seconds is required (caused by "messages.SendMessage")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "pyro_admin.py", line 240, in callback_query
+    await main_group_send_menu(app_bot, app_user, CallbackQuery)
+  File "/root/seller_bot/pyro_main.py", line 225, in main_group_send_menu
+    msg = await app_bot.send_message(main_group_id, c, reply_markup=InlineKeyboardMarkup(GroupsButtons))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/messages/send_message.py", line 124, in send_message
+    r = await self.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/advanced/invoke.py", line 77, in invoke
+    r = await self.session.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 361, in invoke
+    return await self.send(query, timeout=timeout)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 331, in send
+    RPCError.raise_it(result, type(data))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/errors/rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.flood_420.FloodWait: Telegram says: [420 FLOOD_WAIT_X] - A wait of 24 seconds is required (caused by "messages.SendMessage")
+text
+text
+6
+6
+6
+6
+6
+6
+6
+6
+6
+https://t.me/meshureluxuryshoes
+Telegram says: [400 MESSAGE_NOT_MODIFIED] - The message was not modified because you tried to edit it using the same content (caused by "messages.EditMessage")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "pyro_admin.py", line 286, in callback_query
+    await send_bot_menu(app_bot, CallbackQuery)
+  File "pyro_admin.py", line 159, in send_bot_menu
+    await callback.edit_message_text('**Головне меню**', reply_markup=MainMarkup)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/types/bots_and_keyboards/callback_query.py", line 200, in edit_message_text
+    return await self._client.edit_message_text(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/messages/edit_message_text.py", line 80, in edit_message_text
+    r = await self.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/advanced/invoke.py", line 77, in invoke
+    r = await self.session.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 361, in invoke
+    return await self.send(query, timeout=timeout)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 331, in send
+    RPCError.raise_it(result, type(data))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/errors/rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.bad_request_400.MessageNotModified: Telegram says: [400 MESSAGE_NOT_MODIFIED] - The message was not modified because you tried to edit it using the same content (caused by "messages.EditMessage")
+6
+6
+6
+6
+6
+6
+6
+6
+5
+https://t.me/meshureluxuryshoes
+https://t.me/Turk_0pt/219
+https://t.me/Turk_0pt/220
+https://t.me/Turk_0pt/222
+https://t.me/Turk_0pt/224
+https://t.me/Turk_0pt/225
+https://t.me/Turk_0pt/226
+https://t.me/Turk_0pt/227
+https://t.me/Turk_0pt/228
+text
+text
+6
+6
+6
+6
+6
+6
+6
+6
+4
+text
+text
+text
+text
+text
+https://t.me/Turk_0pt/230
+https://t.me/Turk_0pt/231
+https://t.me/Turk_0pt/233
+https://t.me/Turk_0pt/234
+[my_account] Waiting for 4 seconds before continuing (required by "messages.ExportChatInvite")
+[my_account] Waiting for 3 seconds before continuing (required by "messages.ExportChatInvite")
+https://t.me/Turk_0pt/236
+https://t.me/Turk_0pt/237
+https://t.me/Turk_0pt/239
+https://t.me/Turk_0pt/240
+https://t.me/Turk_0pt/241
+https://t.me/Turk_0pt/243
+https://t.me/Turk_0pt/244
+https://t.me/Turk_0pt/245
+https://t.me/Turk_0pt/246
+https://t.me/Turk_0pt/247
+https://t.me/Turk_0pt/249
+Telegram says: [420 FLOOD_WAIT_X] - A wait of 23 seconds is required (caused by "messages.SendMessage")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/dispatcher.py", line 240, in handler_worker
+    await handler.callback(self.client, *args)
+  File "pyro_admin.py", line 240, in callback_query
+    await main_group_send_menu(app_bot, app_user, CallbackQuery)
+  File "/root/seller_bot/pyro_main.py", line 225, in main_group_send_menu
+    msg = await app_bot.send_message(main_group_id, c, reply_markup=InlineKeyboardMarkup(GroupsButtons))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/messages/send_message.py", line 124, in send_message
+    r = await self.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/methods/advanced/invoke.py", line 77, in invoke
+    r = await self.session.invoke(
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 361, in invoke
+    return await self.send(query, timeout=timeout)
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/session/session.py", line 331, in send
+    RPCError.raise_it(result, type(data))
+  File "/usr/local/lib/python3.8/dist-packages/pyrogram/errors/rpc_error.py", line 91, in raise_it
+    raise getattr(
+pyrogram.errors.exceptions.flood_420.FloodWait: Telegram says: [420 FLOOD_WAIT_X] - A wait of 23 seconds is required (caused by "messages.SendMessage")
+text
+6
+6
+6
+6
+6
+6
+6
+6
+5
+6
+6
+6
+6
+6
+https://t.me/Turk_0pt/250
+https://t.me/Turk_0pt/251
+https://t.me/Turk_0pt/253
+https://t.me/Turk_0pt/255
+https://t.me/Turk_0pt/256
+https://t.me/Turk_0pt/257
+text
+https://t.me/Turk_0pt/258
+https://t.me/Turk_0pt/259
+6
+6
+6
+6
+6
+6
+6
+6
+5
+text
+text
+text
+text
+https://t.me/Turk_0pt/261
+https://t.me/Turk_0pt/262
+https://t.me/Turk_0pt/264
+https://t.me/Turk_0pt/266
+https://t.me/Turk_0pt/267
+https://t.me/Turk_0pt/268
+https://t.me/Turk_0pt/269
+https://t.me/Turk_0pt/270
