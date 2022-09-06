@@ -5104,3 +5104,183 @@ Traceback (most recent call last):
   File "/root/seller_bot/pyro_main.py", line 82, in main_create
     await create_channels(return_data_[i].get('channel'), app_bot, app_user, CallbackQuery, ids_[i])
 TypeError: 'function' object is not subscriptable
+iter
+-1001301910755
+1
+channel exists
+iter
+-1001781626408
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists
+iter
+-1001722769212
+1
+channel exists
+iter
+-1001202347780
+1
+channel exists
+iter
+-1001681384538
+1
+channel exists
+iter
+-1001512235328
+1
+channel exists
+iter
+-1001638095450
+1
+channel exists
+iter
+-1001157891993
+1
+channel exists
+iter
+-1001725679159
+1
+channel exists
+iter
+-1001743225478
+1
+channel exists
+iter
+-1001752363694
+1
+channel exists
+iter
+-1001517436682
+1
+channel exists
+iter
+-1001723905599
+1
+channel exists
+iter
+-1001777469724
+1
+channel exists
+iter
+-1001609106895
+1
+channel exists
+iter
+-1001606437904
+1
+channel exists
+iter
+-1001635235619
+1
+channel exists
+iter
+-1001616165904
+1
+channel exists
+iter
+-1001753833916
+1
+channel exists
+iter
+-1001658229338
+1
+channel exists
+iter
+-1001507784730
+1
+channel exists
+iter
+-1001632601623
+1
+channel exists
+iter
+-1001342434966
+1
+channel exists
+iter
+-1001179517011
+1
+channel exists
+iter
+-1001531571813
+1
+channel exists
+iter
+-1001607900739
+1
+channel exists
+iter
+-1001780843308
+1
+channel exists
+iter
+-1001614873560
+1
+channel exists
+iter
+-1001567947798
+1
+channel exists
+iter
+-1001789994326
+1
+channel exists
+iter
+-1001392671668
+1
+channel exists
+iter
+-1001225895546
+1
+channel exists
+iter
+-1001661380070
+1
+channel exists
+iter
+-1001632354530
+1
+channel exists
+iter
+-1001503094690
+1
+channel exists
+iter
+-1001527182641
+1
+channel exists
+iter
+-1001652057973
+1
+channel exists
+iter
+-1001660283652
+1
+channel exists
+iter
+-1001765445247
+1
+channel exists
+iter
+-1001593923131
+1
+channel exists
+iter
+-1001693108317
+1
+channel exists
+iter
+-1001509846293
+1
+channel exists
+iter
+-1001676191365
+1
+channel exists
+iter
+-1001775386712
+1
+channel exists

@@ -126,6 +126,19 @@ async def create_channel(channel, app_user, chat_id):
                     await asyncio.sleep(kk)
                 except Exception as e:
                     print(e)
+            elif message.video:
+                try:
+                    await app_user.send_video(channel.id, message.video.file_id)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except FloodWait as e:
+                    print('wait for', e.value, 'to send message')
+                    await asyncio.sleep(e.value + 2)
+                    await app_user.send_video(channel.id, message.video.file_id)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except Exception as e:
+                    print(e)
             if message.text:
                 try:
                     await app_user.send_message(channel.id, message.text)
@@ -136,6 +149,20 @@ async def create_channel(channel, app_user, chat_id):
                     print('wait for', e.value, 'to send message')
                     await asyncio.sleep(e.value + 2)
                     await app_user.send_message(channel.id, message.text)
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except Exception as e:
+                    print(e)
+            if message.caption:
+                try:
+                    await app_user.send_message(channel.id, message.captionм)
+                    print('text')
+                    kk = random.randrange(1, 10)
+                    await asyncio.sleep(kk)
+                except FloodWait as e:
+                    print('wait for', e.value, 'to send message')
+                    await asyncio.sleep(e.value + 2)
+                    await app_user.send_message(channel.id, message.caption)
                     kk = random.randrange(1, 10)
                     await asyncio.sleep(kk)
                 except Exception as e:
@@ -242,7 +269,7 @@ async def send_new_msg(app_user, message, new_channel_id):
     if not mg_id and not message.media_group_id:
         message.media_group_id = 0
 
-    if (message.photo or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
+    if (message.photo or message.video or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
         kk = random.randrange(1, 4)
         await asyncio.sleep(kk)
         if message.media_group_id:
@@ -267,14 +294,45 @@ async def send_new_msg(app_user, message, new_channel_id):
                 await app_user.send_photo(new_channel_id, message.photo.file_id)
             except Exception as e:
                 print(e)
+        elif message.video:
+            try:
+                await app_user.send_video(new_channel_id, message.video.file_id)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.send_video(new_channel_id, message.video.file_id)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except Exception as e:
+                print(e)
         if message.text:
             try:
                 await app_user.send_message(new_channel_id, message.text)
                 print('text')
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
             except FloodWait as e:
                 print('wait for', e.value, 'to send message')
                 await asyncio.sleep(e.value + 2)
                 await app_user.send_message(new_channel_id, message.text)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except Exception as e:
+                print(e)
+        if message.caption:
+            try:
+                await app_user.send_message(new_channel_id, message.caption)
+                print('text')
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.send_message(new_channel_id, message.caption)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
             except Exception as e:
                 print(e)
 
