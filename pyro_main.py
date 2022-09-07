@@ -37,12 +37,17 @@ data_ = [({
     'name_new': sheet_obj_.cell(row=i + 1, column=4).value,
     'id': sheet_obj_.cell(row=i + 1, column=5).value,
 }) for i in range(1, find_first_empty(sheet_obj_) - 1)]
+def return_categories():
+    categories = []
+    file_categories = openpyxl.load_workbook('categories.xlsx')
+    sheet_obj_categories = file_categories.active
 
-for i in range(find_first_empty(sheet_obj_categories) - 1):
-    if sheet_obj_categories.cell(row=i + 1, column=1).value not in categories:
-        categories.append(sheet_obj_categories.cell(row=i + 1, column=1).value)
+    for i in range(find_first_empty(sheet_obj_categories) - 1):
+        if sheet_obj_categories.cell(row=i + 1, column=1).value not in categories:
+            categories.append(sheet_obj_categories.cell(row=i + 1, column=1).value)
 
-
+    file_categories.close()
+    return categories
 def return_data_():
     file_ = openpyxl.load_workbook('list.xlsx')
     sheet_obj_ = file_.active
@@ -209,7 +214,8 @@ async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
 async def main_group_send_menu(app_bot, app_user, CallbackQuery):
     global main_group_id
     CategoriesButtons = []
-    for c in categories:
+    print(return_categories())
+    for c in return_categories():
         GroupsButtons = []
         cc = 0
         for g in [el for el in return_data_() if el.get('category') == c]:
