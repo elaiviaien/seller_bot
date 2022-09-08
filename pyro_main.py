@@ -174,7 +174,6 @@ async def create_channel(channel, app_user, chat_id):
                     print(e)
         mg_id = message.media_group_id
 
-
 async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
     file = openpyxl.load_workbook('list.xlsx')
     sheet_obj = file.active
@@ -209,6 +208,8 @@ async def create_channels(title, app_bot, app_user, CallbackQuery, chat_id):
             file.close()
             await asyncio.sleep(3)
             await create_channel(channel, app_user, chat_id)
+        except Exception as e:
+            print(e)
 
 
 async def main_group_send_menu(app_bot, app_user, CallbackQuery):
@@ -266,7 +267,6 @@ async def main_group_send_menu(app_bot, app_user, CallbackQuery):
     await app_bot.send_message(CallbackQuery.message.chat.id,
                                'Меню надіслане')
 
-
 async def send_new_msg(app_user, message, new_channel_id):
     last_mes = await app_user.get_messages(message.chat.id, message.id - 1)
     mg_id = await app_user.get_messages(message.chat.id, message.id - 1)
@@ -274,7 +274,7 @@ async def send_new_msg(app_user, message, new_channel_id):
     if not mg_id and not message.media_group_id:
         message.media_group_id = 0
 
-    if (message.photo or message.video or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
+    if (message.photo or message.video or message.animation or last_mes.photo or last_mes.media_group_id) and mg_id != message.media_group_id:
         kk = random.randrange(1, 4)
         await asyncio.sleep(kk)
         if message.media_group_id:
@@ -312,6 +312,19 @@ async def send_new_msg(app_user, message, new_channel_id):
                 await asyncio.sleep(kk)
             except Exception as e:
                 print(e)
+        elif message.animation:
+            try:
+                await app_user.send_animation(new_channel_id, message.animation.file_id)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except FloodWait as e:
+                print('wait for', e.value, 'to send message')
+                await asyncio.sleep(e.value + 2)
+                await app_user.send_animation(new_channel_id, message.animation.file_id)
+                kk = random.randrange(1, 10)
+                await asyncio.sleep(kk)
+            except Exception as e:
+                print(e)
         if message.text:
             try:
                 await app_user.send_message(new_channel_id, message.text)
@@ -340,7 +353,6 @@ async def send_new_msg(app_user, message, new_channel_id):
                 await asyncio.sleep(kk)
             except Exception as e:
                 print(e)
-
 
 async def add_new_category(app_bot, message):
     file_c = openpyxl.load_workbook('categories.xlsx')
@@ -373,9 +385,12 @@ async def add_new_channel(app_bot, message):
     name = name.split(',')
     if name[0] not in channels:
         try:
-            sheet_obj_n.cell(row, 1, value=name[0].strip())
-            sheet_obj_n.cell(row, 2, value=name[1].strip())
-            sheet_obj_n.cell(row, 4, value=name[2].strip())
+            if name[0]:
+                sheet_obj_n.cell(row, 1, value=name[0].strip())
+            if name[1]:
+                sheet_obj_n.cell(row, 2, value=name[1].strip())
+            if name[2]:
+                sheet_obj_n.cell(row, 4, value=name[2].strip())
             await app_bot.send_message(message.chat.id, 'Канал додано')
 
             file_c.save('list.xlsx')
